@@ -11,9 +11,9 @@ wordpress:
     - 9090
   labels:
     # Setting the CNS service name
-    - triton.cns.services=wordpress2
+    - triton.cns.services=wordpress
     # Soft anti-affinity to avoid other WordPress instances
-    - com.docker.swarm.affinities=["container!=~*wordpress2*"]
+    - com.docker.swarm.affinities=["container!=~*wordpress*"]
 
 # Consul is the service catalog that helps discovery between the components
 # Change "-bootstrap" to "-bootstrap-expect 3", then scale to 3 or more to
@@ -34,7 +34,7 @@ consul:
   dns:
     - 127.0.0.1
   labels:
-    - triton.cns.services=consul2
+    - triton.cns.services=consul
     - com.docker.swarm.affinities=["container!=~*"]
 
 # NFS is used to store user uploads
@@ -50,7 +50,7 @@ nfs:
     - 1892
     - 2049
   labels:
-    - triton.cns.services=nfs2
+    - triton.cns.services=nfs
     # Soft anti-affinity to avoid all other containers
     - com.docker.swarm.affinities=["container!=~*"]
 
@@ -66,8 +66,8 @@ mysql:
   expose:
     - 3306
   labels:
-    - triton.cns.services=mysql2
-    - com.docker.swarm.affinities=["container!=~*mysql2*"]
+    - triton.cns.services=mysql
+    - com.docker.swarm.affinities=["container!=~*mysql*"]
 
 # Memcached is a high performance object cache
 memcached:
@@ -80,8 +80,8 @@ memcached:
   ports:
     - 11211
   labels:
-    - triton.cns.services=memcached2
-    - com.docker.swarm.affinities=["container!=~*memcached2*"]
+    - triton.cns.services=memcached
+    - com.docker.swarm.affinities=["container!=~*memcached*"]
 
 # Nginx as a load-balancing tier and reverse proxy
 nginx:
@@ -96,8 +96,8 @@ nginx:
   environment:
     - CONSUL_AGENT=1
   labels:
-    - triton.cns.services=nginx2
-    - com.docker.swarm.affinities=["container!=~*nginx2*"]
+    - triton.cns.services=nginx
+    - com.docker.swarm.affinities=["container!=~*nginx*"]
 
 # Prometheus is an open source performance monitoring tool
 # it is included here for demo purposes and is not required
@@ -109,6 +109,5 @@ prometheus:
   ports:
     - 9090
   labels:
-    - triton.cns.services=prometheus2
-    - com.docker.swarm.affinities=["container!=~*prometheus2*"]
-    
+    - triton.cns.services=prometheus
+    - com.docker.swarm.affinities=["container!=~*prometheus*"]
